@@ -1,0 +1,6 @@
+.idea
+.DS_Store
+__pycache__
+env
+!application/app/files/__init__.py
+application/app/files/*
