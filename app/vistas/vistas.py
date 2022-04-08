@@ -32,6 +32,9 @@ class VistaSignIn(Resource):
         db.session.commit()
         return '', 204
 
+class VistaHealth(Resource):
+    def get(self):
+        return "pong"
 
 class VistaLogIn(Resource):
     def get(self):
