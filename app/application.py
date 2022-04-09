@@ -4,6 +4,7 @@ from modelos.modelos import BlackList, User, db
 from flask_cors import CORS
 from flask import request
 import bcrypt
+from datetime import datetime
 
 def create_app(config_name):
     application = Flask(__name__)
@@ -89,4 +90,4 @@ def blacklist(email=None):
         return {"message": "Email does'nt exist in the blacklist."}, 200
 
 if __name__ == "__main__":
-    application.run(port = 5000, debug = True)
+    application.run(port = 3000, debug = True)
