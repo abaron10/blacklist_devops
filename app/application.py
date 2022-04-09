@@ -1,12 +1,9 @@
 from flask import Flask, jsonify
-from modelos.modelos import BlackList, User, db
-import bcrypt
-from flask_restful import Api 
-from flask import request
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity, JWTManager
-from datetime import datetime
-import bcrypt
+from modelos.modelos import BlackList, User, db
 from flask_cors import CORS
+from flask import request
+import bcrypt
 
 def create_app(config_name):
     application = Flask(__name__)
@@ -24,6 +21,7 @@ db.init_app(application)
 db.create_all()
 cors = CORS(application)
 jwt = JWTManager(application)
+
 
 @application.route("/", methods=["GET"])
 def index():
@@ -89,7 +87,6 @@ def blacklist(email=None):
         if email_existance:
             return {"message": "Email exist in the blacklist."}, 201
         return {"message": "Email does'nt exist in the blacklist."}, 200
-
 
 if __name__ == "__main__":
     application.run(port = 5000, debug = True)
