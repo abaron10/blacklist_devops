@@ -1,3 +1,4 @@
+from os import environ
 from flask import Flask, jsonify
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity, JWTManager
 from modelos.modelos import BlackList, User, db
@@ -8,7 +9,7 @@ from datetime import datetime
 
 def create_app(config_name):
     application = Flask(__name__)
-    application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///conversion_system.db'
+    application.config['SQLALCHEMY_DATABASE_URI'] = environ.get('PG_DATABASE') if environ.get('PG_DATABASE') != None else 'sqlite:///conversion_system.db'
     application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     application.config['JWT_SECRET_KEY'] = 'ROCK&ROLL_TRAIN_ACDC'
     application.config['PROPAGATE_EXCEPTION'] = True
