@@ -37,11 +37,11 @@ def sign_in_user():
     if password1 != password2:
         return {"message": "Passwords must match in order to Sign-In"}, 403
 
-    password1 = bcrypt.hashpw((password1).encode('utf-8'), bcrypt.gensalt())
+    password1 = bcrypt.hashpw(password=password1.encode('utf-8'), salt=bcrypt.gensalt())
     exist_email = User.query.filter_by(email=email).first() is not None
     if exist_email:
         return {"message": "This Email match an existent account.Try again!"}, 403
-    new_user = User(username=request.json["username"], password1=password1, email=email)
+    new_user = User(username=request.json["username"], password1=password1.decode('utf-8'), email=email)
     access_token = create_access_token(identity=request.json["username"])
     db.session.add(new_user)
     db.session.commit()
@@ -57,7 +57,7 @@ def log_in_user():
     if user is None:
         return "The username do not exist", 404
 
-    if not bcrypt.checkpw(u_password1.encode('utf8'), user.password1):
+    if not bcrypt.checkpw(u_password1.encode('utf8'), user.password1.encode('utf-8')):
         return "Incorrect password"
 
     else:
