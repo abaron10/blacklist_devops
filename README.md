@@ -8,7 +8,7 @@
 
 Para construir el proyecto es necesario utilizar un ambiente virtual de python, para realizarlo se debe instalar **venv** y crearlo con el siguiente comando:
 
-```bashs
+```bash
   $ python3 -m venv env
 ```
 
